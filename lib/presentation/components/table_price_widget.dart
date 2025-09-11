@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:quentinha_app/core/consts/prices_const.dart';
 
-class PricingTable extends StatelessWidget {
-  const PricingTable({super.key});
+class TablePriceWidget extends StatelessWidget {
+  const TablePriceWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,19 +70,19 @@ class PricingTable extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "R\$ ${PricesConst.marmitaTradicional.toStringAsFixed(2)}",
+                "R\$ ${PricesConst.marmitaTradicional.round().toStringAsFixed(2)}",
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "R\$ ${(PricesConst.marmitaTradicional * PricesConst.mealsPerWeek).toStringAsFixed(2)}",
+                "R\$ ${(PricesConst.marmitaTradicional * PricesConst.mealsPerWeek).round().toStringAsFixed(2)}",
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "R\$ ${(PricesConst.marmitaTradicional * PricesConst.weeksPerMonth).toStringAsFixed(2)}",
+                "R\$ ${(PricesConst.marmitaTradicional * PricesConst.weeksPerMonth).round().toStringAsFixed(2)}",
               ),
             ),
           ],
@@ -98,19 +98,19 @@ class PricingTable extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "R\$ ${PricesConst.marmitaFitness.toStringAsFixed(2)}",
+                "R\$ ${PricesConst.marmitaFitness.round().toStringAsFixed(2)}",
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "R\$ ${(PricesConst.marmitaFitness * PricesConst.mealsPerWeek).toStringAsFixed(2)}",
+                "R\$ ${(PricesConst.marmitaFitness * PricesConst.mealsPerWeek).round().toStringAsFixed(2)}",
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "R\$ ${(PricesConst.marmitaFitness * PricesConst.weeksPerMonth).toStringAsFixed(2)}",
+                "R\$ ${(PricesConst.marmitaFitness * PricesConst.weeksPerMonth).round().toStringAsFixed(2)}",
               ),
             ),
           ],
@@ -124,18 +124,18 @@ class PricingTable extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text("R\$ ${PricesConst.pratoDoDia.toStringAsFixed(2)}"),
+              child: Text("R\$ ${PricesConst.pratoDoDia.round().toStringAsFixed(2)}"),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "R\$ ${(PricesConst.pratoDoDia * PricesConst.mealsPerWeek).toStringAsFixed(2)}",
+                "R\$ ${(PricesConst.pratoDoDia * PricesConst.mealsPerWeek).round().toStringAsFixed(2)}",
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "R\$ ${(PricesConst.pratoDoDia * PricesConst.weeksPerMonth).toStringAsFixed(2)}",
+                "R\$ ${(PricesConst.pratoDoDia * PricesConst.weeksPerMonth).round().toStringAsFixed(2)}",
               ),
             ),
           ],
@@ -150,18 +150,18 @@ class PricingTable extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text("R\$ ${PricesConst.marmitaPersonalizada.toStringAsFixed(2)}"),
+              child: Text("R\$ ${PricesConst.marmitaPersonalizada.round().toStringAsFixed(2)}"),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "R\$ ${(PricesConst.marmitaPersonalizada * PricesConst.mealsPerWeek).toStringAsFixed(2)}",
+                "R\$ ${(PricesConst.marmitaPersonalizada * PricesConst.mealsPerWeek).round().toStringAsFixed(2)}",
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "R\$ ${(PricesConst.marmitaPersonalizada * PricesConst.weeksPerMonth).toStringAsFixed(2)}",
+                "R\$ ${(PricesConst.marmitaPersonalizada * PricesConst.weeksPerMonth).round().toStringAsFixed(2)}",
               ),
             ),
           ],
