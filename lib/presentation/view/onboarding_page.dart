@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:quentinha_app/presentation/view/home_page.dart';
+import 'package:quentinha_app/core/consts/colors_const.dart';
+import 'package:quentinha_app/presentation/components/register_login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../components/table_price_page_wIdget.dart';
+import '../components/wellcome_widget.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -10,10 +15,10 @@ class OnboardingPage extends StatelessWidget {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('seenOnboarding', true);
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const HomePage()),
-    );
+    // Usando GoRouter para navegação
+    // Certifique-se de ter configurado a rota '/home' no seu GoRouter
+    // e de importar 'package:go_router/go_router.dart'
+    context.go('/home');
   }
 
   @override
@@ -23,32 +28,31 @@ class OnboardingPage extends StatelessWidget {
       child: IntroductionScreen(
         pages: [
           PageViewModel(
-            title: "👋 Bem-vindo!",
-            body: "Aqui você vai aprender como usar o app.",
-            image: Center(child: Icon(Icons.phone_android, size: 120)),
+            title: "Bem-vindo ao Quentinha 🍲",
+            bodyWidget: WellcomeWidget(),
+            image: Center(
+              child: Image.asset("assets/images/logo-2.png", width: 400),
+            ),
           ),
-          PageViewModel(
-            title: "📦 Funcionalidade 1",
-            body: "Explicação sobre algo que seu app faz.",
-            image: Center(child: Icon(Icons.explore, size: 120)),
-          ),
-          PageViewModel(
-            title: "🚀 Bora começar!",
-            body: "Clique em começar para usar o app agora.",
-            image: Center(child: Icon(Icons.rocket_launch, size: 120)),
-          ),
+          PageViewModel(title: "", bodyWidget: TablePricePageWIdget()),
+          PageViewModel(title: "", bodyWidget: RegisterLoginPage()),
         ],
         onDone: () => _finishOnboarding(context),
-        onSkip: () => _finishOnboarding(context), // se o usuário pular
         showSkipButton: true,
-        skip: const Text("Pular"),
-        next: const Icon(Icons.arrow_forward),
-        done: const Text("Começar", style: TextStyle(fontWeight: FontWeight.w600)),
-        dotsDecorator: const DotsDecorator(
+        skip: Text("Pular", style: TextStyle(color: AppColors.primary)),
+        next: Icon(Icons.arrow_forward, color: AppColors.primary),
+        done: Text(
+          "Começar",
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: AppColors.primary,
+          ),
+        ),
+        dotsDecorator: DotsDecorator(
           size: Size(10.0, 10.0),
           color: Colors.grey,
           activeSize: Size(22.0, 10.0),
-          activeColor: Colors.orange,
+          activeColor: AppColors.primary,
           activeShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(25.0)),
           ),
