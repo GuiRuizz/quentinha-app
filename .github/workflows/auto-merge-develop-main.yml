@@ -1,0 +1,85 @@
+name: Auto Merge develop -> main
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  auto-merge-to-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cria ou atualiza PR de develop -> main
+        id: create_pr
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+
+            // Verifica se já existe um PR aberto de develop -> main
+            const { data: prs } = await github.rest.pulls.list({
+              owner,
+              repo,
+              state: "open",
+              head: `${owner}:develop`,
+              base: "main",
+            });
+
+            let prNumber;
+
+            if (prs.length > 0) {
+              prNumber = prs[0].number;
+              console.log(`PR já existe (#${prNumber})`);
+            } else {
+              const { data: newPr } = await github.rest.pulls.create({
+                owner,
+                repo,
+                title: "Merge develop into main",
+                head: "develop",
+                base: "main",
+                body: "🚀 PR criado automaticamente quando houve push para develop.",
+              });
+              prNumber = newPr.number;
+              console.log(`PR criado (#${prNumber})`);
+            }
+
+            core.setOutput("pr_number", prNumber);
+
+      - name: Tenta merge automático do PR
+        id: merge_pr
+        continue-on-error: true
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = core.getInput("pr_number", { required: true });
+
+            try {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: prNumber,
+                merge_method: "merge", // pode trocar por "squash" ou "rebase"
+              });
+              console.log(`✅ PR #${prNumber} mergeado com sucesso!`);
+            } catch (error) {
+              core.setFailed("❌ Não foi possível mergear automaticamente.");
+            }
+
+      - name: Comenta no PR se houver conflitos
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = core.getInput("pr_number", { required: true });
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: "⚠️ Merge automático falhou. Há conflitos que precisam ser resolvidos manualmente.",
+            });
+
+            console.log(`Comentário adicionado no PR #${prNumber}`);
