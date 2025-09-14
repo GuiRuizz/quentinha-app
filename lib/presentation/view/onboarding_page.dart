@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:quentinha_app/presentation/components/register_login_page.dart';
-import 'package:quentinha_app/presentation/view/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 import '../components/table_price_page_wIdget.dart';
 import '../components/wellcome_widget.dart';
@@ -16,10 +15,10 @@ class OnboardingPage extends StatelessWidget {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('seenOnboarding', true);
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const HomePage()),
-    );
+    // Usando GoRouter para navegação
+    // Certifique-se de ter configurado a rota '/home' no seu GoRouter
+    // e de importar 'package:go_router/go_router.dart'
+    context.go('/home');
   }
 
   @override
@@ -35,23 +34,19 @@ class OnboardingPage extends StatelessWidget {
               child: Image.asset("assets/images/logo-2.png", width: 400),
             ),
           ),
-          PageViewModel(
-            title: "",
-            bodyWidget: TablePricePageWIdget(),
-          ),
-          PageViewModel(
-            title: "",
-            bodyWidget: RegisterLoginPage(),
-          ),
+          PageViewModel(title: "", bodyWidget: TablePricePageWIdget()),
+          PageViewModel(title: "", bodyWidget: RegisterLoginPage()),
         ],
         onDone: () => _finishOnboarding(context),
-        onSkip: () => _finishOnboarding(context),
         showSkipButton: true,
         skip: Text("Pular", style: TextStyle(color: AppColors.primary)),
         next: Icon(Icons.arrow_forward, color: AppColors.primary),
         done: Text(
           "Começar",
-          style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.primary),
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: AppColors.primary,
+          ),
         ),
         dotsDecorator: DotsDecorator(
           size: Size(10.0, 10.0),
@@ -66,6 +61,3 @@ class OnboardingPage extends StatelessWidget {
     );
   }
 }
-
-
-
