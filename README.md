@@ -22,7 +22,7 @@ Com ele, você pode **reservar suas marmitas semanalmente, mensalmente ou até m
 - **Backend:** Supabase (PostgreSQL)  
 - **Autenticação:** Supabase Auth  
 - **Armazenamento:** Supabase Storage  
-- **Gerenciamento de Estado:** Provider / Riverpod (dependendo do que você usar)  
+- **Gerenciamento de Estado:** Provider
 
 ---
 
@@ -37,8 +37,8 @@ Com ele, você pode **reservar suas marmitas semanalmente, mensalmente ou até m
 Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/quentinha.git
-cd quentinha
+git clone https://github.com/GuiRuizz/quentinha-app
+cd quentinha-app
 ```
 
 Instale as dependências:
