@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:quentinha_app/core/consts/size_const.dart';
 
@@ -103,7 +104,7 @@ class RegisterLoginPage extends StatelessWidget {
             // Texto rodapé
             TextButton(
               onPressed: () {
-                // TODO: navegar para login se já tiver conta
+                context.go('/login');
                 AppLogger.i("Navegar para login");
               },
               child: const Text(

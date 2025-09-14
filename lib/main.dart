@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'presentation/view/home_page.dart';
-import 'presentation/view/onboarding_page.dart';
+import 'core/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,13 +18,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      theme: ThemeData(
+        primaryColor: AppColors.primary,
+        textSelectionTheme:  TextSelectionThemeData(
+          cursorColor: AppColors.primary, // cursor
+          selectionColor: Colors.orangeAccent, // texto selecionado
+          selectionHandleColor: Colors.orange, // "bolinha" do seletor
+        ),
+      ),
       title: 'Onboarding Demo',
       debugShowCheckedModeBanner: false,
-      home: seenOnboarding ? const HomePage() : const OnboardingPage(),
+      routerConfig: AppRoutes.router(seenOnboarding),
     );
   }
 }
-
-
-
