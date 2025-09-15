@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
+import 'package:quentinha_app/core/consts/routes_const.dart';
 import 'package:quentinha_app/presentation/components/register_login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +19,7 @@ class OnboardingPage extends StatelessWidget {
     // Usando GoRouter para navegação
     // Certifique-se de ter configurado a rota '/home' no seu GoRouter
     // e de importar 'package:go_router/go_router.dart'
-    context.go('/home');
+    context.go(AppNameRoutes.home);
   }
 
   @override

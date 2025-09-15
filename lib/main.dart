@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/routes/routes.dart';
@@ -26,8 +27,11 @@ class MyApp extends StatelessWidget {
           selectionColor: Colors.orangeAccent, // texto selecionado
           selectionHandleColor: Colors.orange, // "bolinha" do seletor
         ),
+        textTheme: GoogleFonts.robotoTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
-      title: 'Onboarding Demo',
+      title: 'Quentinhas App',
       debugShowCheckedModeBanner: false,
       routerConfig: AppRoutes.router(seenOnboarding),
     );
