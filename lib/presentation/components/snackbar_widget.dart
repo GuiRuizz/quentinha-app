@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
+import 'package:quentinha_app/core/consts/size_const.dart';
 
 class CustomSnackBar {
   /// Exibe diretamente a snackbar customizada
@@ -16,7 +17,7 @@ class CustomSnackBar {
           children: [
             if (icon != null) ...[
               Icon(icon, color: Colors.white),
-              const SizedBox(width: 8),
+              8.h,
             ],
             Expanded(child: Text(message)),
           ],
