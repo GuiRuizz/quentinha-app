@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:quentinha_app/core/consts/size_const.dart';
-import 'package:quentinha_app/presentation/components/password_field_widget.dart';
+import 'package:quentinha_app/core/log/logger.dart';
 
-import '../../core/consts/routes_const.dart';
-import '../../core/log/logger.dart';
+import '../components/password_field_widget.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool rememberAccount = false;
 
-  void _signOn() {
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  void _register() {
     if (_formKey.currentState!.validate()) {
       final senha = _passwordController.text;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -55,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Entrar",
+                      "Registrar",
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
@@ -66,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: EdgeInsets.all(16.0),
                       child: Text(
-                        "Por favor, faça login para continuar a utilizar o app da Quentinha.",
+                        "Crie sua conta para começar a usar o app e fazer pedidos! É rápido e fácil.",
                         style: TextStyle(color: Colors.white70),
                         textAlign: TextAlign.center,
                       ),
@@ -108,20 +115,25 @@ class _LoginPageState extends State<LoginPage> {
                           // Email
                           const Text("EMAIL"),
                           const SizedBox(height: 8),
-                          TextField(
+                          TextFormField(
                             decoration: InputDecoration(
                               hintText: "exemplo@gmail.com",
                               filled: true,
                               fillColor: Colors.grey[300],
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 14,
-                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide.none,
                               ),
                             ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Digite o e-mail";
+                              }
+                              if (!value.contains("@")) {
+                                return "E-mail inválido";
+                              }
+                              return null;
+                            },
                           ),
 
                           const SizedBox(height: 20),
@@ -142,57 +154,32 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
 
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 20),
 
-                          // Remember + Forgot Password
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: rememberAccount,
-                                    activeColor: AppColors.primary,
-                                    onChanged: (bool? newValue) {
-                                      setState(() {
-                                        rememberAccount = newValue ?? false;
-                                      });
-
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            rememberAccount
-                                                ? 'Conta será lembrada ✅'
-                                                : 'Conta não será lembrada ❌',
-                                          ),
-                                          duration: const Duration(seconds: 2),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                  const Text("Lembrar-me"),
-                                ],
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  "Esqueci minha senha",
-                                  style: TextStyle(color: Colors.deepOrange),
-                                ),
-                              ),
-                            ],
+                          // Confirm Password
+                          const Text("CONFIRMAR SENHA"),
+                          const SizedBox(height: 8),
+                          PasswordField(
+                            controller: _confirmPasswordController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Confirme a senha";
+                              }
+                              if (value != _passwordController.text) {
+                                return "As senhas não coincidem";
+                              }
+                              return null;
+                            },
                           ),
 
                           const SizedBox(height: 20),
 
-                          // Botão Login
+                          // Botão Registrar
                           SizedBox(
                             width: double.infinity,
                             height: 50,
                             child: ElevatedButton(
-                              onPressed: _signOn,
+                              onPressed: _register,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.primary,
                                 shape: RoundedRectangleBorder(
@@ -200,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                               child: const Text(
-                                "ENTRAR",
+                                "REGISTRAR-SE",
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -212,27 +199,7 @@ class _LoginPageState extends State<LoginPage> {
 
                           const SizedBox(height: 20),
 
-                          // Signup
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text("Não tem conta? "),
-                              GestureDetector(
-                                onTap: () {
-                                  context.push(AppNameRoutes.register);
-                                },
-                                child: const Text(
-                                  "Inscreva-se",
-                                  style: TextStyle(
-                                    color: Colors.deepOrange,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          const SizedBox(height: 20),
+                        
 
                           // Divider Or
                           Row(
@@ -240,7 +207,7 @@ class _LoginPageState extends State<LoginPage> {
                               Expanded(child: Divider()),
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 8),
-                                child: Text("Ou"),
+                                child: Text("Se preferir"),
                               ),
                               Expanded(child: Divider()),
                             ],
