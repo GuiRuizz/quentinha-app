@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quentinha_app/core/consts/routes_const.dart';
-import 'package:quentinha_app/presentation/view/register_page.dart';
-
-import '../../presentation/view/home_page.dart';
-import '../../presentation/view/login_page.dart';
-import '../../presentation/view/onboarding_page.dart';
+import 'export_routes.dart';
 
 class AppRoutes {
-  
 
   static GoRouter router(bool seenOnboarding) {
     return GoRouter(
@@ -33,6 +28,11 @@ class AppRoutes {
           path: AppNameRoutes.register,
           name: 'register',
           builder: (context, state) => const RegisterPage(),
+        ),
+        GoRoute(
+          path: AppNameRoutes.forgotPassword,
+          name: 'forgot_password',
+          builder: (context, state) => const ForgotPasswordPage(),
         ),
       ],
       errorBuilder: (context, state) => Scaffold(

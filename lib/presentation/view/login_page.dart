@@ -6,7 +6,6 @@ import 'package:quentinha_app/core/consts/size_const.dart';
 import 'package:quentinha_app/presentation/components/password_field_widget.dart';
 
 import '../../core/consts/routes_const.dart';
-import '../../core/log/logger.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,11 +21,9 @@ class _LoginPageState extends State<LoginPage> {
 
   void _signOn() {
     if (_formKey.currentState!.validate()) {
-      final senha = _passwordController.text;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Cadastro realizado com sucesso!")),
+        const SnackBar(content: Text("Login realizado com sucesso!")),
       );
-      AppLogger.i("Senha cadastrada: $senha");
     }
   }
 
@@ -107,28 +104,33 @@ class _LoginPageState extends State<LoginPage> {
                           20.h,
                           // Email
                           const Text("EMAIL"),
-                          const SizedBox(height: 8),
-                          TextField(
+                          8.h,
+                          TextFormField(
                             decoration: InputDecoration(
                               hintText: "exemplo@gmail.com",
                               filled: true,
                               fillColor: Colors.grey[300],
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 14,
-                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide.none,
                               ),
                             ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Digite o e-mail";
+                              }
+                              if (!value.contains("@")) {
+                                return "E-mail inválido";
+                              }
+                              return null;
+                            },
                           ),
 
-                          const SizedBox(height: 20),
+                          20.h,
 
                           // Password
                           const Text("SENHA"),
-                          const SizedBox(height: 8),
+                          8.h,
                           PasswordField(
                             controller: _passwordController,
                             validator: (value) {
@@ -142,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
 
-                          const SizedBox(height: 10),
+                          10.h,
 
                           // Remember + Forgot Password
                           Row(
@@ -176,7 +178,9 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.push(AppNameRoutes.forgotPassword);
+                                },
                                 child: const Text(
                                   "Esqueci minha senha",
                                   style: TextStyle(color: Colors.deepOrange),
@@ -185,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
 
-                          const SizedBox(height: 20),
+                          20.h,
 
                           // Botão Login
                           SizedBox(
@@ -210,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
 
-                          const SizedBox(height: 20),
+                          20.h,
 
                           // Signup
                           Row(
@@ -232,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
 
-                          const SizedBox(height: 20),
+                          20.h,
 
                           // Divider Or
                           Row(
@@ -246,7 +250,7 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
 
-                          const SizedBox(height: 20),
+                          20.h,
 
                           // Social buttons
                           Row(
