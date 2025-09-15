@@ -19,8 +19,10 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool rememberAccount = false;
 
-  void _signOn() {
+  void _signOn() async {
     if (_formKey.currentState!.validate()) {
+      FocusScope.of(context).unfocus();
+      await Future.delayed(const Duration(seconds: 2));
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Login realizado com sucesso!")),
       );
