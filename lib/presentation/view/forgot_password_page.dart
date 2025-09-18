@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:quentinha_app/core/consts/size_const.dart';
+import 'package:quentinha_app/presentation/components/snackbar_widget.dart';
 import '../../core/consts/routes_const.dart';
 import '../../core/log/logger.dart';
 
@@ -18,14 +19,28 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   final TextEditingController _emailController = TextEditingController();
   bool rememberAccount = false;
 
-  void _forgotPassword() {
+  void _forgotPassword() async {
     if (_formKey.currentState!.validate()) {
       final email = _emailController.text;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Cadastro realizado com sucesso!")),
+
+      // Fecha teclado
+      FocusManager.instance.primaryFocus?.unfocus();
+      await Future.delayed(const Duration(milliseconds: 200));
+
+      // Mostra loading + snackbar
+      await CustomSnackBar.showWithLoading(
+        context,
+        message: "Se o e-mail existir, um link de recuperação foi enviado.",
+        backgroundColor: Colors.green,
+        icon: Icons.check_circle,
+        delay: const Duration(seconds: 2),
       );
+
       AppLogger.i("Email que foi solicitado para recuperar a senha: $email");
-      context.go(AppNameRoutes.login);
+      // Navega para a página de login
+      if (mounted) {
+        context.go(AppNameRoutes.login);
+      }
     }
   }
 
@@ -106,7 +121,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           20.h,
                           // Email
                           const Text("EMAIL"),
-                          const SizedBox(height: 8),
+                          8.h,
                           TextFormField(
                             decoration: InputDecoration(
                               hintText: "exemplo@gmail.com",

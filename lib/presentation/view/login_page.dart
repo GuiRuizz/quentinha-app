@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:quentinha_app/core/consts/size_const.dart';
 import 'package:quentinha_app/presentation/components/password_field_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/consts/routes_const.dart';
+import '../components/snackbar_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,11 +21,31 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool rememberAccount = false;
 
-  void _signOn() {
+  void _signOn() async {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Login realizado com sucesso!")),
+      // Fecha teclado
+      FocusManager.instance.primaryFocus?.unfocus();
+      await Future.delayed(const Duration(milliseconds: 200));
+
+      // Mostra loading + snackbar
+      await CustomSnackBar.showWithLoading(
+        context,
+        message: "Login realizado com sucesso!",
+        backgroundColor: Colors.green,
+        icon: Icons.check_circle,
+        delay: const Duration(seconds: 2),
       );
+
+      // Navega para a página de login
+      if (mounted) {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('seenOnboarding', true);
+
+        // Usando GoRouter para navegação
+        // Certifique-se de ter configurado a rota '/home' no seu GoRouter
+        // e de importar 'package:go_router/go_router.dart'
+        context.go(AppNameRoutes.home);
+      }
     }
   }
 
@@ -268,7 +290,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Colors.black,
                                 3,
                               ),
-                              const SizedBox(width: 16),
+                              16.h,
                               _socialButton(
                                 SvgPicture.network(
                                   "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg",

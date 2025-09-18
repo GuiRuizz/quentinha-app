@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:quentinha_app/core/consts/size_const.dart';
 import 'package:quentinha_app/core/log/logger.dart';
+import 'package:quentinha_app/presentation/components/snackbar_widget.dart';
 
 import '../components/password_field_widget.dart';
 
@@ -27,13 +28,19 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  void _register() {
+  void _register() async {
     if (_formKey.currentState!.validate()) {
+      FocusScope.of(context).unfocus();
+      await Future.delayed(const Duration(seconds: 2));
       final senha = _passwordController.text;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Cadastro realizado com sucesso!")),
+      CustomSnackBar.show(
+        context,
+        message: "Cadastro realizado com sucesso!",
+        backgroundColor: Colors.green,
+        icon: Icons.check_circle,
       );
       AppLogger.i("Senha cadastrada: $senha");
+
     }
   }
 
@@ -114,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           20.h,
                           // Email
                           const Text("EMAIL"),
-                          const SizedBox(height: 8),
+                          8.h,
                           TextFormField(
                             decoration: InputDecoration(
                               hintText: "exemplo@gmail.com",
@@ -136,11 +143,11 @@ class _RegisterPageState extends State<RegisterPage> {
                             },
                           ),
 
-                          const SizedBox(height: 20),
+                          20.h,
 
                           // Password
                           const Text("SENHA"),
-                          const SizedBox(height: 8),
+                          8.h,
                           PasswordField(
                             controller: _passwordController,
                             validator: (value) {
@@ -154,11 +161,11 @@ class _RegisterPageState extends State<RegisterPage> {
                             },
                           ),
 
-                          const SizedBox(height: 20),
+                          20.h,
 
                           // Confirm Password
                           const Text("CONFIRMAR SENHA"),
-                          const SizedBox(height: 8),
+                          8.h,
                           PasswordField(
                             controller: _confirmPasswordController,
                             validator: (value) {
@@ -172,7 +179,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             },
                           ),
 
-                          const SizedBox(height: 20),
+                          20.h,
 
                           // Botão Registrar
                           SizedBox(
@@ -197,7 +204,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
 
-                          const SizedBox(height: 20),
+                          20.h,
 
                         
 
@@ -213,7 +220,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ],
                           ),
 
-                          const SizedBox(height: 20),
+                          20.h,
 
                           // Social buttons
                           Row(
@@ -231,7 +238,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 Colors.black,
                                 3,
                               ),
-                              const SizedBox(width: 16),
+                              16.h,
                               _socialButton(
                                 SvgPicture.network(
                                   "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg",
