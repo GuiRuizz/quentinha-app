@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,6 +7,10 @@ import 'core/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   final prefs = await SharedPreferences.getInstance();
   final bool? seenOnboarding = prefs.getBool('seenOnboarding');
