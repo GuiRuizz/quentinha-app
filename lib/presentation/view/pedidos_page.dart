@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quentinha_app/core/consts/colors_const.dart';
+import 'package:quentinha_app/core/consts/size_const.dart';
 
 import '../components/bottom_nav_bar_widget.dart';
 
@@ -43,72 +45,36 @@ class _PedidosPageState extends State<PedidosPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavBar(currentRoute: currentRoute),
-      appBar: AppBar(
-        title: const Text('Meus Pedidos'),
-        backgroundColor: Colors.orange,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: ListView(
-          children: [
-            if (pedidoAtual != null) ...[
-              const Text(
-                'Pedido em Andamento',
-                style: TextStyle(
-                    fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              Card(
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
-                child: ListTile(
-                  title: Text(pedidoAtual!['produto']),
-                  subtitle: Text(
-                      'Quantidade: ${pedidoAtual!['quantidade']}\nStatus: ${pedidoAtual!['status']}'),
-                  trailing: Icon(Icons.local_shipping, color: Colors.orange),
-                  onTap: () {
-                    // Aqui você pode ir para uma página de detalhes do pedido
-                    showDialog(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        title: Text('Pedido #${pedidoAtual!['id']}'),
-                        content: Text(
-                            'Produto: ${pedidoAtual!['produto']}\nQuantidade: ${pedidoAtual!['quantidade']}\nStatus: ${pedidoAtual!['status']}'),
-                        actions: [
-                          TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text('Fechar'))
-                        ],
-                      ),
-                    );
-                  },
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: ListView(
+            children: [
+              if (pedidoAtual != null) ...[
+                const Text(
+                  'Em Andamento',
+                  style: TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-              ),
-              const SizedBox(height: 20),
-            ],
-            const Text(
-              'Histórico de Pedidos',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            ...pedidosHistorico.map((pedido) => Card(
-                  elevation: 2,
+                8.h,
+                Card(
+                  elevation: 0,
+                  color: AppColors.widgetBackgroundGrey,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
                   child: ListTile(
-                    title: Text(pedido['produto']),
+                    title: Text(pedidoAtual!['produto']),
                     subtitle: Text(
-                        'Quantidade: ${pedido['quantidade']}\nData: ${pedido['data']}\nStatus: ${pedido['status']}'),
-                    trailing: Icon(Icons.history, color: Colors.grey),
+                        'Quantidade: ${pedidoAtual!['quantidade']}\nStatus: ${pedidoAtual!['status']}'),
+                    trailing: Icon(Icons.local_shipping, color: AppColors.primary),
                     onTap: () {
-                      // Detalhes do pedido histórico
+                      // Aqui você pode ir para uma página de detalhes do pedido
                       showDialog(
                         context: context,
                         builder: (_) => AlertDialog(
-                          title: Text('Pedido #${pedido['id']}'),
+                          title: Text('Pedido #${pedidoAtual!['id']}'),
                           content: Text(
-                              'Produto: ${pedido['produto']}\nQuantidade: ${pedido['quantidade']}\nData: ${pedido['data']}\nStatus: ${pedido['status']}'),
+                              'Produto: ${pedidoAtual!['produto']}\nQuantidade: ${pedidoAtual!['quantidade']}\nStatus: ${pedidoAtual!['status']}'),
                           actions: [
                             TextButton(
                                 onPressed: () => Navigator.pop(context),
@@ -118,8 +84,44 @@ class _PedidosPageState extends State<PedidosPage> {
                       );
                     },
                   ),
-                )),
-          ],
+                ),
+                const SizedBox(height: 20),
+              ],
+              const Text(
+                'Histórico de Pedidos',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              8.h,
+              ...pedidosHistorico.map((pedido) => Card(
+                    elevation: 0,
+                    color: AppColors.widgetBackgroundGrey,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    child: ListTile(
+                      title: Text(pedido['produto']),
+                      subtitle: Text(
+                          'Quantidade: ${pedido['quantidade']}\nData: ${pedido['data']}\nStatus: ${pedido['status']}'),
+                      trailing: Icon(Icons.history, color: Colors.grey),
+                      onTap: () {
+                        // Detalhes do pedido histórico
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: Text('Pedido #${pedido['id']}'),
+                            content: Text(
+                                'Produto: ${pedido['produto']}\nQuantidade: ${pedido['quantidade']}\nData: ${pedido['data']}\nStatus: ${pedido['status']}'),
+                            actions: [
+                              TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text('Fechar'))
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  )),
+            ],
+          ),
         ),
       ),
     );
