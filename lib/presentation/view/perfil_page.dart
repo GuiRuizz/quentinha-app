@@ -151,31 +151,31 @@ class _PerfilPageState extends State<PerfilPage> {
               leading: Icon(Icons.key, color: AppColors.primary,),
               title: const Text('Conta', style: TextStyle(fontWeight: FontWeight.bold,),),
               subtitle:
-                  const Text('Privacidade, segurança, mudança de informações pessoais'),
+                  Text('Privacidade, segurança, mudança de informações pessoais', style: TextStyle(color: AppColors.textSecondary),),
               onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.lock , color: AppColors.primary,),
               title: const Text('Privacidade', style: TextStyle(fontWeight: FontWeight.bold,),),
-              subtitle: const Text('Bloqueios, status, confirmação de leitura'),
+              subtitle: Text('Bloqueios, status, confirmação de leitura', style: TextStyle(color: AppColors.textSecondary),),
               onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.notifications, color: AppColors.primary,),
               title: const Text('Notificações', style: TextStyle(fontWeight: FontWeight.bold,),),
-              subtitle: const Text('Sons de mensagens e chamadas'),
+              subtitle: Text('Sons de mensagens e chamadas', style: TextStyle(color: AppColors.textSecondary),),
               onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.help_outline, color: AppColors.primary,),
               title: const Text('Ajuda', style: TextStyle(fontWeight: FontWeight.bold,),),
-              subtitle: const Text('Central de ajuda, contato e termos'),
+              subtitle: Text('Central de ajuda, contato e termos', style: TextStyle(color: AppColors.textSecondary),),
               onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.info_outline , color: AppColors.primary,),
               title: const Text('Sobre', style: TextStyle(fontWeight: FontWeight.bold,),),
-              subtitle: const Text('Versão do aplicativo e informações'),
+              subtitle: Text('Versão do aplicativo e informações', style: TextStyle(color: AppColors.textSecondary),),
               onTap: () {},
             ),
 
@@ -208,7 +208,7 @@ class _PerfilPageState extends State<PerfilPage> {
           text,
           style: TextStyle(
             fontSize: 18,
-            fontWeight: FontWeight.bold,
+            color: AppColors.textSecondary
           ),
         ),
         8.w,
