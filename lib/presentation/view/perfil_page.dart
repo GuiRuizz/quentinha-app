@@ -205,7 +205,7 @@ class _PerfilPageState extends State<PerfilPage> {
       children: [
         Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -226,18 +226,23 @@ class _PerfilPageState extends State<PerfilPage> {
         SizedBox(
           width: 200,
           child: TextField(
+            cursorColor: AppColors.primary, // cor do cursor
             controller: controller,
             textAlign: TextAlign.center,
             autofocus: true,
             decoration: InputDecoration(
               labelText: label,
+              labelStyle: TextStyle(color: AppColors.primary), // label laranja
               isDense: true,
-              border: const UnderlineInputBorder(),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primary, width: 2),
+              ),
+              enabledBorder: const UnderlineInputBorder(), // cor padrão do underline
             ),
           ),
         ),
         IconButton(
-          icon: const Icon(Icons.check, color: Colors.green),
+          icon: Icon(Icons.check, color: AppColors.primary), // ícone laranja
           onPressed: onSave,
         ),
       ],
