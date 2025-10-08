@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quentinha_app/core/consts/routes_const.dart';
+import '../../presentation/animation/custom_slide_transition.dart';
 import 'export_routes.dart';
 
 
@@ -14,7 +15,11 @@ class AppRoutes {
         GoRoute(
           path: AppNameRoutes.home,
           name: 'home',
-          builder: (context, state) => const HomePage(),
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context, 
+            state: state, 
+            child: HomePage(),
+          ),
         ),
         GoRoute(
           path: AppNameRoutes.planos,
@@ -24,7 +29,11 @@ class AppRoutes {
         GoRoute(
           path: AppNameRoutes.pedidos,
           name: 'pedidos',
-          builder: (context, state) => const PedidosPage(),
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context, 
+            state: state, 
+            child: PedidosPage(),
+          ),
         ),
         GoRoute(
           path: AppNameRoutes.perfil,
