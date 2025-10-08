@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: leftPadding),
                       child: Text(
-                        'Olá {Nome do cliente}, ${DateUtilsHelper.saudacao()}!',
+                        'Olá Guilherme, ${DateUtilsHelper.saudacao()}!', //TODO: Colocar o nome dinamicamente
                         style: TextStyle(fontSize: 18),
                         textAlign: TextAlign.start,
                       ),
