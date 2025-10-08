@@ -24,7 +24,11 @@ class AppRoutes {
         GoRoute(
           path: AppNameRoutes.planos,
           name: 'planos',
-          builder: (context, state) => const PlanosPage(),
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context, 
+            state: state, 
+            child: PlanosPage(),
+          ),
         ),
         GoRoute(
           path: AppNameRoutes.pedidos,
@@ -38,7 +42,11 @@ class AppRoutes {
         GoRoute(
           path: AppNameRoutes.perfil,
           name: 'perfil',
-          builder: (context, state) => const PerfilPage(),
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            context: context, 
+            state: state, 
+            child: PerfilPage(),
+          ),
         ),
         GoRoute(
           path: AppNameRoutes.login,
