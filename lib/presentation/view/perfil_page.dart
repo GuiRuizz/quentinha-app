@@ -148,38 +148,39 @@ class _PerfilPageState extends State<PerfilPage> {
             const Divider(),
 
             ListTile(
-              leading: const Icon(Icons.key),
-              title: const Text('Conta'),
+              leading: Icon(Icons.key, color: AppColors.primary,),
+              title: const Text('Conta', style: TextStyle(fontWeight: FontWeight.bold,),),
               subtitle:
-                  const Text('Privacidade, segurança, mudança de informações pessoais'),
+                  Text('Privacidade, segurança, mudança de informações pessoais', style: TextStyle(color: AppColors.textSecondary),),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.lock),
-              title: const Text('Privacidade'),
-              subtitle: const Text('Bloqueios, status, confirmação de leitura'),
+              leading: Icon(Icons.lock , color: AppColors.primary,),
+              title: const Text('Privacidade', style: TextStyle(fontWeight: FontWeight.bold,),),
+              subtitle: Text('Bloqueios, status, confirmação de leitura', style: TextStyle(color: AppColors.textSecondary),),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.notifications),
-              title: const Text('Notificações'),
-              subtitle: const Text('Sons de mensagens e chamadas'),
+              leading: Icon(Icons.notifications, color: AppColors.primary,),
+              title: const Text('Notificações', style: TextStyle(fontWeight: FontWeight.bold,),),
+              subtitle: Text('Sons de mensagens e chamadas', style: TextStyle(color: AppColors.textSecondary),),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.help_outline),
-              title: const Text('Ajuda'),
-              subtitle: const Text('Central de ajuda, contato e termos'),
+              leading: Icon(Icons.help_outline, color: AppColors.primary,),
+              title: const Text('Ajuda', style: TextStyle(fontWeight: FontWeight.bold,),),
+              subtitle: Text('Central de ajuda, contato e termos', style: TextStyle(color: AppColors.textSecondary),),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.info_outline),
-              title: const Text('Sobre'),
-              subtitle: const Text('Versão do aplicativo e informações'),
+              leading: Icon(Icons.info_outline , color: AppColors.primary,),
+              title: const Text('Sobre', style: TextStyle(fontWeight: FontWeight.bold,),),
+              subtitle: Text('Versão do aplicativo e informações', style: TextStyle(color: AppColors.textSecondary),),
               onTap: () {},
             ),
 
-            16.h,            const Divider(),
+            16.h,           
+            const Divider(),
 
             // BOTÃO DE SAIR
             ListTile(
@@ -205,9 +206,9 @@ class _PerfilPageState extends State<PerfilPage> {
       children: [
         Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
-            fontWeight: FontWeight.bold,
+            color: AppColors.textSecondary
           ),
         ),
         8.w,
@@ -226,18 +227,23 @@ class _PerfilPageState extends State<PerfilPage> {
         SizedBox(
           width: 200,
           child: TextField(
+            cursorColor: AppColors.primary, // cor do cursor
             controller: controller,
             textAlign: TextAlign.center,
             autofocus: true,
             decoration: InputDecoration(
               labelText: label,
+              labelStyle: TextStyle(color: AppColors.primary), // label laranja
               isDense: true,
-              border: const UnderlineInputBorder(),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primary, width: 2),
+              ),
+              enabledBorder: const UnderlineInputBorder(), // cor padrão do underline
             ),
           ),
         ),
         IconButton(
-          icon: const Icon(Icons.check, color: Colors.green),
+          icon: Icon(Icons.check, color: AppColors.primary), // ícone laranja
           onPressed: onSave,
         ),
       ],
