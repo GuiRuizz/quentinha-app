@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:quentinha_app/core/consts/size_const.dart';
-
 import '../../core/utils/date_time_utils.dart';
 import '../../data/models/marmita_model.dart';
 import '../components/app_bar_widget.dart';
@@ -77,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: leftPadding),
                       child: Text(
-                        'Olá {Nome do cliente}, ${DateUtilsHelper.saudacao()}!',
+                        'Olá Guilherme, ${DateUtilsHelper.saudacao()}!', //TODO: Colocar o nome dinamicamente
                         style: TextStyle(fontSize: 18),
                         textAlign: TextAlign.start,
                       ),
@@ -131,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                           left: leftPadding,
                           right: leftPadding,
                         ),
-                        separatorBuilder: (_, __) => const SizedBox(width: 10),
+                        separatorBuilder: (_, __) => 10.w,
                         itemCount: categories.length,
                         itemBuilder: (context, index) {
                           final cat = categories[index];

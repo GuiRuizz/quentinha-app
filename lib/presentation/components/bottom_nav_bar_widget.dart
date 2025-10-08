@@ -36,16 +36,16 @@ class BottomNavBar extends StatelessWidget {
       onTap: (index) {
         switch (index) {
           case 0:
-            context.push(AppNameRoutes.home);
+            context.go(AppNameRoutes.home);
             break;
           case 1:
-            context.push(AppNameRoutes.planos);
+            context.go(AppNameRoutes.planos);
             break;
           case 2:
-            context.push(AppNameRoutes.pedidos);
+            context.go(AppNameRoutes.pedidos);
             break;
           case 3:
-            context.push(AppNameRoutes.perfil);
+            context.go(AppNameRoutes.perfil);
             break;
         }
       },
