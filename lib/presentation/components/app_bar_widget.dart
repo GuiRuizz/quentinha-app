@@ -65,16 +65,17 @@ class AppBarPersonalizada extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: AppColors.widgetBackgroundGrey,
               borderRadius: BorderRadius.circular(100),
             ),
             child: IconButton(
               icon: badges.Badge(
-                badgeContent: Text('3'),
+                badgeContent: Text('3', style: TextStyle(color: Colors.white),), //TODO: colocar a quantidade dinamicamente
                 position: badges.BadgePosition.topEnd(top: -15),
+                badgeStyle: badges.BadgeStyle(badgeColor: AppColors.primary),
                 child: const Icon(
                   Icons.shopping_bag_rounded,
-                  color: Colors.white,
+                  color: Colors.black,
                 ),
               ),
               onPressed: () {
