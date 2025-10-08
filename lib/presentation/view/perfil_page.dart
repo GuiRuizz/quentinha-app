@@ -148,38 +148,39 @@ class _PerfilPageState extends State<PerfilPage> {
             const Divider(),
 
             ListTile(
-              leading: const Icon(Icons.key),
-              title: const Text('Conta'),
+              leading: Icon(Icons.key, color: AppColors.primary,),
+              title: const Text('Conta', style: TextStyle(fontWeight: FontWeight.bold,),),
               subtitle:
                   const Text('Privacidade, segurança, mudança de informações pessoais'),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.lock),
-              title: const Text('Privacidade'),
+              leading: Icon(Icons.lock , color: AppColors.primary,),
+              title: const Text('Privacidade', style: TextStyle(fontWeight: FontWeight.bold,),),
               subtitle: const Text('Bloqueios, status, confirmação de leitura'),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.notifications),
-              title: const Text('Notificações'),
+              leading: Icon(Icons.notifications, color: AppColors.primary,),
+              title: const Text('Notificações', style: TextStyle(fontWeight: FontWeight.bold,),),
               subtitle: const Text('Sons de mensagens e chamadas'),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.help_outline),
-              title: const Text('Ajuda'),
+              leading: Icon(Icons.help_outline, color: AppColors.primary,),
+              title: const Text('Ajuda', style: TextStyle(fontWeight: FontWeight.bold,),),
               subtitle: const Text('Central de ajuda, contato e termos'),
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.info_outline),
-              title: const Text('Sobre'),
+              leading: Icon(Icons.info_outline , color: AppColors.primary,),
+              title: const Text('Sobre', style: TextStyle(fontWeight: FontWeight.bold,),),
               subtitle: const Text('Versão do aplicativo e informações'),
               onTap: () {},
             ),
 
-            16.h,            const Divider(),
+            16.h,           
+            const Divider(),
 
             // BOTÃO DE SAIR
             ListTile(
