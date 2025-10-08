@@ -3,16 +3,33 @@ import 'package:go_router/go_router.dart';
 import 'package:quentinha_app/core/consts/routes_const.dart';
 import 'export_routes.dart';
 
-class AppRoutes {
 
+class AppRoutes {
   static GoRouter router(bool seenOnboarding) {
     return GoRouter(
-      initialLocation: seenOnboarding ? AppNameRoutes.home : AppNameRoutes.onboarding,
+      initialLocation: seenOnboarding
+          ? AppNameRoutes.home
+          : AppNameRoutes.onboarding,
       routes: [
         GoRoute(
           path: AppNameRoutes.home,
           name: 'home',
           builder: (context, state) => const HomePage(),
+        ),
+        GoRoute(
+          path: AppNameRoutes.planos,
+          name: 'planos',
+          builder: (context, state) => const PlanosPage(),
+        ),
+        GoRoute(
+          path: AppNameRoutes.pedidos,
+          name: 'pedidos',
+          builder: (context, state) => const PedidosPage(),
+        ),
+        GoRoute(
+          path: AppNameRoutes.perfil,
+          name: 'perfil',
+          builder: (context, state) => const PerfilPage(),
         ),
         GoRoute(
           path: AppNameRoutes.login,
