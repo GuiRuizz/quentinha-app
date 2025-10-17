@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "608998763205",
+    "project_id": "quentinha-app-c58a8",
+    "storage_bucket": "quentinha-app-c58a8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608998763205:android:a3826db7a993c65c04deac",
+        "android_client_info": {
+          "package_name": "com.quentinha.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608998763205-ijepr4ls5hd5dk1a1d6qclqm38qj9frv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.quentinha.app",
+            "certificate_hash": "aef0d5114d0ef947fc48eb0af7b07757955be9ce"
+          }
+        },
+        {
+          "client_id": "608998763205-m6qa0cndknvofnvmebtv6tgll6l911ud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxw9c8DJALnvYGaPJ8nbmJNqPGDja9aLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608998763205-m6qa0cndknvofnvmebtv6tgll6l911ud.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "608998763205-bolrakag8smuqli9vbb40ke0ki794kjr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.quentinhaApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -18,16 +19,21 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool rememberAccount = false;
 
   void _signOn() async {
-    if (_formKey.currentState!.validate()) {
-      // Fecha teclado
-      FocusManager.instance.primaryFocus?.unfocus();
-      await Future.delayed(const Duration(milliseconds: 200));
+  if (_formKey.currentState!.validate()) {
+    FocusManager.instance.primaryFocus?.unfocus();
 
-      // Mostra loading + snackbar
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      // Se deu certo:
       await CustomSnackBar.showWithLoading(
         context,
         message: "Login realizado com sucesso!",
@@ -36,18 +42,28 @@ class _LoginPageState extends State<LoginPage> {
         delay: const Duration(seconds: 2),
       );
 
-      // Navega para a página de login
-      if (mounted) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setBool('seenOnboarding', true);
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('seenOnboarding', true);
 
-        // Usando GoRouter para navegação
-        // Certifique-se de ter configurado a rota '/home' no seu GoRouter
-        // e de importar 'package:go_router/go_router.dart'
-        context.go(AppNameRoutes.home);
+      if (mounted) context.go(AppNameRoutes.home);
+    } on FirebaseAuthException catch (e) {
+      String message = "Erro ao fazer login.";
+      if (e.code == 'user-not-found') {
+        message = "Usuário não encontrado.";
+      } else if (e.code == 'wrong-password') {
+        message = "Senha incorreta.";
       }
+      CustomSnackBar.show(
+        context,
+        message: message,
+        backgroundColor: Colors.red,
+        icon: Icons.error,
+      );
     }
   }
+}
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                           const Text("EMAIL"),
                           8.h,
                           TextFormField(
+                            controller: _emailController,
                             decoration: InputDecoration(
                               hintText: "exemplo@gmail.com",
                               filled: true,
