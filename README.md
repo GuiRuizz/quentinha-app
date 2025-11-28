@@ -19,10 +19,9 @@ Com ele, você pode **reservar suas marmitas semanalmente, mensalmente ou até m
 ## 🛠️ Tecnologias Utilizadas
 
 - **Frontend:** Flutter (Dart)  
-- **Backend:** Supabase (PostgreSQL)  
-- **Autenticação:** Supabase Auth  
-- **Armazenamento:** Supabase Storage  
-- **Gerenciamento de Estado:** Provider
+- **Backend:** Firebase (PostgreSQL)  
+- **Autenticação:** Firebase Auth  
+- **Gerenciamento de Estado:** Riverpod
 
 ---
 
