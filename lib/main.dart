@@ -1,11 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/routes/routes.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +14,7 @@ void main() async {
 
   final prefs = await SharedPreferences.getInstance();
   final bool? seenOnboarding = prefs.getBool('seenOnboarding');
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(MyApp(seenOnboarding: seenOnboarding ?? false));
 }
 
@@ -29,12 +27,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       theme: ThemeData(
         primaryColor: AppColors.primary,
-        textSelectionTheme: TextSelectionThemeData(
+        textSelectionTheme:  TextSelectionThemeData(
           cursorColor: AppColors.primary, // cursor
           selectionColor: Colors.orangeAccent, // texto selecionado
           selectionHandleColor: Colors.orange, // "bolinha" do seletor
         ),
-        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.robotoTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       title: 'Quentinhas App',
       debugShowCheckedModeBanner: false,
