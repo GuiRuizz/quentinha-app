@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quentinha_app/core/consts/colors_const.dart';
 import 'package:quentinha_app/core/consts/size_const.dart';
+import 'package:quentinha_app/presentation/components/drawer_widget.dart';
 import '../../core/utils/date_time_utils.dart';
 import '../../data/models/marmita_model.dart';
 import '../components/app_bar_widget.dart';
@@ -58,7 +59,8 @@ class _HomePageState extends State<HomePage> {
     final double leftPadding = 16.0;
     final currentRoute = GoRouterState.of(context).uri.toString();
     return Scaffold(
-      backgroundColor: Colors.white,
+      drawer: const AppDrawer(),
+      backgroundColor: AppColors.background,
       bottomNavigationBar: BottomNavBar(currentRoute: currentRoute),
       body: SafeArea(
         child: Column(
