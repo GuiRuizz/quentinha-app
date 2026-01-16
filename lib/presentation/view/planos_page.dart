@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quentinha_app/core/consts/size_const.dart';
 
+import '../../core/consts/colors_const.dart';
 import '../../core/consts/routes_const.dart';
-import '../components/bottom_nav_bar_widget.dart';
 
 class PlanosPage extends StatefulWidget {
   const PlanosPage({super.key});
@@ -53,6 +54,8 @@ class _PlanosPageState extends State<PlanosPage> {
     },
   ];
 
+  //TODO: Criar um plano fixo de personalizar
+
   @override
   void initState() {
     super.initState();
@@ -81,8 +84,6 @@ class _PlanosPageState extends State<PlanosPage> {
 
   @override
   Widget build(BuildContext context) {
-    final currentRoute = GoRouterState.of(context).uri.toString();
-
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
@@ -90,56 +91,53 @@ class _PlanosPageState extends State<PlanosPage> {
           context.go(AppNameRoutes.home);
         }
       },
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        bottomNavigationBar: BottomNavBar(currentRoute: currentRoute),
-        body: PageView.builder(
-          controller: _controller,
-          itemCount: planos.length,
-          itemBuilder: (context, index) {
-            final plano = planos[index];
+      child: SafeArea(
+        top: false,
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          // bottomNavigationBar: BottomNavBar(currentRoute: currentRoute),
+          body: PageView.builder(
+            controller: _controller,
+            itemCount: planos.length,
+            itemBuilder: (context, index) {
+              final plano = planos[index];
 
-            return Stack(
-              children: [
-                /// 🔹 Background image
-                Positioned.fill(
-                  child: Image.network(plano['image'], fit: BoxFit.cover),
-                ),
+              return Stack(
+                children: [
+                  /// 🔹 Background image
+                  Positioned.fill(
+                    child: Image.network(plano['image'], fit: BoxFit.cover),
+                  ),
 
-                /// 🔹 Dark overlay
-                Positioned.fill(
-                  child: Container(color: Colors.black.withOpacity(0.35)),
-                ),
+                  /// 🔹 Dark overlay
+                  Positioned.fill(
+                    child: Container(color: Colors.black.withAlpha(35)),
+                  ),
 
-                /// 🔹 Top icons
-                SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _circleIcon(Icons.arrow_back, () {
-                          context.pop();
-                        }),
-                        _circleIcon(Icons.help_outline, () {}),
-                      ],
+                  /// 🔹 Top icons
+                  SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      child: _circleIcon(Icons.arrow_back, () {
+                        context.go(AppNameRoutes.home);
+                      }),
                     ),
                   ),
-                ),
 
-                /// 🔹 Bottom card
-                Positioned(
-                  left: 16,
-                  right: 16,
-                  bottom: 24,
-                  child: _PlanCard(plano: plano),
-                ),
-              ],
-            );
-          },
+                  /// 🔹 Bottom card
+                  Positioned(
+                    left: 16,
+                    right: 16,
+                    bottom: 24,
+                    child: _PlanCard(plano: plano),
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
@@ -200,7 +198,7 @@ class _PlanCard extends StatelessWidget {
               letterSpacing: 1.2,
             ),
           ),
-          const SizedBox(height: 6),
+          6.h,
 
           /// Title
           Text(
@@ -211,14 +209,15 @@ class _PlanCard extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 10),
+          10.h,
 
           /// Description
           Text(
             plano['description'],
             style: const TextStyle(color: Colors.white70, fontSize: 14),
           ),
-          const SizedBox(height: 16),
+          
+          16.h,
 
           /// Info row
           Row(
@@ -233,7 +232,8 @@ class _PlanCard extends StatelessWidget {
               _infoItem(Icons.schedule, plano['time'], 'Prep Time'),
             ],
           ),
-          const SizedBox(height: 20),
+
+          20.h,
 
           /// Price + Button
           Row(
@@ -252,8 +252,8 @@ class _PlanCard extends StatelessWidget {
                   // TODO: Navegar para checkout
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  foregroundColor: Colors.white,
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: AppColors.background,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
@@ -263,7 +263,7 @@ class _PlanCard extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'Choose This Plan →',
+                  'Escolha esse plano →',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
