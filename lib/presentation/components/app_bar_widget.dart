@@ -28,6 +28,7 @@ class AppBarPersonalizada extends StatelessWidget {
                   icon: const Icon(Icons.sort, color: Colors.black),
                   onPressed: () {
                     AppLogger.i('Menu button pressed');
+                    Scaffold.of(context).openDrawer();
                   },
                 ),
               ),
