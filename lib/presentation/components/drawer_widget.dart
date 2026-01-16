@@ -83,7 +83,7 @@ class AppDrawer extends StatelessWidget {
 
   Widget _drawerItem(IconData icon, String title, VoidCallback onTap) {
     return ListTile(
-      leading: Icon(icon, color: AppColors.textSecondary),
+      leading: Icon(icon, color: AppColors.primary),
       title: Text(title),
       onTap: onTap,
     );
